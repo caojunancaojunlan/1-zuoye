@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>应答系统</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" style="margin-left: -150px">自动应答系统</a>
+        </div>
+    </div>
+</nav>
+
+<div class="panel panel-default" style="height: 80%">
+
+    <div class="panel-heading">
+        <div class="panel-body" id="TxtOut">
+
+        </div>
+        <div class="panel-footer">
+            <form method="post">
+                {% csrf_token %}
+                <textarea id="TxtIn" type="text" name="msg" placeholder="请输入消息"></textarea>
+                {#                    <button type="submit" class="btn btn-primary" style="right: 0;bottom: 0">发送</button>#}
+                <input type="button" value="发送" onclick="sendmessage()" style="float: right">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<style>
+html,body{
+    height: 100%;
+}
+    form {
+    display: block;
+    margin-top: 0em;
+    margin-block-end: 1em;
+    text-align: center;
+    }
+    .panel-heading {
+        width: 100%;
+        height: 100%;
+    }
+
+    #TxtIn {
+        height: 25%;
+        width: 95%;
+        border-radius: 10px;
+    }
+
+    #TxtOut {
+        height: 50%;
+        width: 100%;
+        text-align: left;
+        border: 1px solid;
+        background-color: white;
+        overflow: scroll;
+        border-radius: 10px;
+    }
+</style>
+
+<script>
+
+    socket = new WebSocket("ws://"+location.host+"/ws/test/");
+
+    {# 两端创建好连接时触发 #}
+    socket.onopen = function (event) {
+        let tag = document.createElement("div");
+        tag.innerText = "连接成功";
+        document.getElementById("TxtOut").appendChild(tag);
+    }
+
+
+    {# 收到服务端消息时触发 #}
+    socket.onmessage = function (event) {
+        console.log(event.data);
+        let tag = document.createElement("div");
+        tag.innerText = event.data;
+        document.getElementById("TxtOut").appendChild(tag);
+    }
+
+    socket.onclose = function (event) {
+        let tag = document.createElement("div");
+        tag.innerText = "我不知道，给你百度链接去看看:www.baidu.com";
+        document.getElementById("TxtOut").appendChild(tag);
+
+        let t = event.currentTarget
+        socket.send(t)
+    }
+
+    function closeConn() {
+        socket.close()
+    }
+
+    function sendmessage() {
+        let tag = document.getElementById('TxtIn');
+        socket.send(tag.value);
+        tag.value = "";
+    }
+
+    function enterBtn(a) {
+        if (a == 13) {
+            sendmessage();
+        }
+    }
+</script>

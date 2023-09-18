@@ -1,0 +1,32 @@
+{% extends 'allstyle.html' %}
+{% block content %}
+
+    <div>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">修改管理员</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">管理员姓名</label>
+                            <input type="text" class="form-control" name="admin" placeholder="管理员姓名"
+                                   value="{{ admin_obj.Ad_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">管理员密码</label>
+                            <input type="text" class="form-control" name="pwd" placeholder="管理员密码"
+                                   value="{{ admin_obj.Ad_password }}">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

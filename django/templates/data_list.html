@@ -1,0 +1,68 @@
+{% extends 'allstyle.html' %}
+
+{% block content %}
+    <div class="container">
+            <div style="margin-bottom: 10px" class="clearfix">
+                <a class="btn btn-success" href="/data/add/">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    添加应答信息
+                </a>
+
+                <div style="float: right;width: 300px;">
+                    <form method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="Search for..." value="{{ search_data }}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+    <div >
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                应答信息列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>关键字</th>
+            		 <th>回复文字</th>
+            		 <th>图片</th>
+            		 <th>超链接</th>
+            		 <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% load static %}
+        			{% for data_obj in queryset  %}
+            			<tr>
+                			<td>{{ data_obj.key_words }}</td>
+                			<td>{{ data_obj.reply }}</td>
+                			<td>
+                    			<img src={{ MEDIA_URL }}{{data_obj.user_image }} alt="no">
+                			</td>
+                			<td>{{ data_obj.url }}</td>
+                			<td>
+                    			<a href="/data/edit/?data_id={{ data_obj.data_id }}">修改</a>
+                    			<a href="/data/delete/?id={{ data_obj.data_id }}">删除</a>
+                			</td>
+            			</tr>
+        			{% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+    </div>
+{% endblock %}
