@@ -1,0 +1,73 @@
+{% extends 'allstyle.html' %}
+
+{% block content %}
+    <div class="container">
+        <div style="margin-bottom: 10px" class="clearfix">
+            <a class="btn btn-success" href="/user/add/">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                添加用户
+            </a>
+            <a  class="btn btn-success" href="/download/">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                导出用户表
+            </a>
+            <div style="float: right;width: 300px;">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="Search for..." value="{{ search_data }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                用户列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>用户ID</th>
+                    <th>用户性别</th>
+                    <th>用户姓名</th>
+                    <th>用户密码</th>
+                    <th>用户邮箱</th>
+                    <th>用户手机号</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in queryset %}
+                    <tr>
+                        <th scope="row">{{ obj.user_id }}</th>
+                        <td>{{ obj.get_user_sex_display }}</td>
+                        <td>{{ obj.user_name }}</td>
+                        <td>{{ obj.user_password }}</td>
+                        <td>{{ obj.user_email }}</td>
+                        <td>{{ obj.user_phone }}</td>
+                        <td>
+                            <a href="/user/delete/?nid={{ obj.user_id }}" class="btn btn-danger btn-xs">删除</a>
+                            <a href="/user/{{ obj.user_id }}/edit/" class="btn btn-primary btn-xs">编辑</a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+    </div>
+
+{% endblock %}

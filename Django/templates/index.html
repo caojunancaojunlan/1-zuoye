@@ -1,0 +1,73 @@
+{% extends 'allstyle.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>访问用户信息</title>
+    <script type="text/javascript">
+            window.onload = function(){
+                var oTable = document.getElementById("num");
+                for(var i=0;i<oTable.rows.length;i++){
+                oTable.rows[i].cells[0].innerHTML = (i+1);
+            }
+        }
+    </script>
+</head>
+<body>
+        <form action="/get_Sta/" method="post">
+            {% csrf_token %}
+             <div class="block" >
+                 起始时间: <input type="datetime-local" name="date1" value="{{ statistics_list.date }}" />
+             </div>
+             <div class="block" >
+                 结束时间: <input type="datetime-local" name="date2" value="{{ statistics_list.date }}" />
+             </div>
+                <button type="submit">搜索</button>
+        </form>
+    <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                后台访问信息列表
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th width="5%">序号</th>
+            		<th>用户IP地址</th>
+            		<th>用户浏览器信息</th>
+            		<th>用户上线时间</th>
+                </tr>
+                </thead>
+                <tbody id="num">
+                {% load static %}
+                {% for statistics_obj in queryset %}
+            <tr>
+                <td>{{ num }}</td>
+                <td>{{ statistics_obj.user_ip }}</td>
+                <td>{{ statistics_obj.user_brower }}</td>
+                <td>{{ statistics_obj.date }}</td>
+            </tr>
+         {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+    </div>
+</body>
+<style>
+    .block{
+        float: left;
+        padding: 10px;
+    }
+    button{
+        margin: 10px;
+    }
+</style>
+    </html>
+{% endblock %}
