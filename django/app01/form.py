@@ -1,8 +1,4 @@
-#!/usr/bin/env python
-# @Time:2022/9/20 11:04
-# @Author:小周
-# @File:form.py.py
-# @Software:PyCharm
+
 
 # from django import forms
 # from django.core.validators import RegexValidator

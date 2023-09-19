@@ -1,8 +1,4 @@
-#!/usr/bin/env python
-# @Time:2022/9/16 11:13
-# @Author: 小周
-# @File:mymiddleware.py.py
-# @Software:PyCharm
+
 import time
 
 from django.http import HttpResponse

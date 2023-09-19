@@ -596,7 +596,7 @@ def gpt3_interaction(request):
         input_text = request.POST.get('input_text')
 
         # 构建GPT-3.5 API请求
-        api_key = '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'
+        api_key = '*****************'
         api_endpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions'
         headers = {
             'Authorization': f'Bearer {api_key}',

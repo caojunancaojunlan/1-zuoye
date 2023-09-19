@@ -91,14 +91,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Django.wsgi.application'
 ASGI_APPLICATION = 'Django.routing.application'
 
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = '********************8'
 # CORS配置
 CORS_ORIGIN_ALLOW_ALL = True
 
 # settings.py
 
-TENCENT_CLOUD_SECRET_ID = 'AKIDLZeXFLEvP6arvlNmxud7MO0OXTnmX4Xt'
-TENCENT_CLOUD_SECRET_KEY = 'IMHG4oOn01pRtBH9oJacIsGRyMZXGrLe'
+TENCENT_CLOUD_SECRET_ID = '*****************'
+TENCENT_CLOUD_SECRET_KEY = '*********************'
 TENCENT_CLOUD_REGION = 'ap-guangzhou'  # 根据您的实际情况选择地域
 
 

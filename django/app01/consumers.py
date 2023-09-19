@@ -1,8 +1,4 @@
-# #!/usr/bin/env python
-# # @Time:2022/9/27 9:42
-# # @Author:小周
-# # @File: consumers.py
-# # @Software:PyCharm
+
 # # 存储连接用户的地址，同ip可同时存在多用户，每一页面代表不同用户
 # from datetime import datetime
 #
@@ -49,7 +45,7 @@
 #             try:
 #                 # 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey,此处还需注意密钥对的保密
 #                 # 密钥可前往https://console.cloud.tencent.com/cam/capi网站进行获取
-#                 cred = credential.Credential("AKIDmXDlFdu23zrdM1ZyGdCiElHifYKAsTxK", "MaiiccXL2c4Vp2BHk9TiqFY5X5Vp2894")
+#                 cred = credential.Credential("***************", "************************")
 #                 # 实例化一个http选项，可选的，没有特殊需求可以跳过
 #                 httpProfile = HttpProfile()
 #                 httpProfile.endpoint = "nlp.tencentcloudapi.com"
@@ -82,12 +78,7 @@
 #         print(message['text'])
 #         raise StopConsumer()
 
-# !/usr/bin/env python
-# @Time:2022/9/27 9:42
-# @Author:小周
-# @File:consumers.py
-# @Software:PyCharm
-# 存储连接用户的地址，同ip可同时存在多用户，每一页面代表不同用户
+
 from datetime import datetime
 
 from channels.exceptions import StopConsumer
@@ -148,7 +139,7 @@ class ChatConsumer(WebsocketConsumer):
                 # 实例化一个认证对象，入参需要传入腾讯云账户 SecretId 和 SecretKey，此处还需注意密钥对的保密
                 # 代码泄露可能会导致 SecretId 和 SecretKey 泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议采用更安全的方式来使用密钥，请参见：https://cloud.tencent.com/document/product/1278/85305
                 # 密钥可前往官网控制台 https://console.cloud.tencent.com/cam/capi 进行获取
-                cred = credential.Credential("AKIDLZeXFLEvP6arvlNmxud7MO0OXTnmX4Xt", "IMHG4oOn01pRtBH9oJacIsGRyMZXGrLe")
+                cred = credential.Credential("****************", "******************")
                 # 实例化一个http选项，可选的，没有特殊需求可以跳过
                 httpProfile = HttpProfile()
                 httpProfile.endpoint = "tbp.tencentcloudapi.com"
@@ -162,7 +153,7 @@ class ChatConsumer(WebsocketConsumer):
                 # 实例化一个请求对象,每个接口都会对应一个request对象
                 req = models.TextProcessRequest()
                 params = {
-                    "BotId": "d2b163de-faa0-4c01-b53a-5f59e2fb1a54",
+                    "BotId": "***********************",
                     "BotEnv": "release",
                     "InputText": "message['text']",
                     "TerminalId": "127.0.0.1:8000"
@@ -198,7 +189,7 @@ class ChatConsumer(WebsocketConsumer):
             #             input_text = request.POST.get('input_text')
             #
             #             # 配置 TBP 客户端
-            #             cred = credential.Credential("AKIDLZeXFLEvP6arvlNmxud7MO0OXTnmX4Xt", "IMHG4oOn01pRtBH9oJacIsGRyMZXGrLe")
+            #             cred = credential.Credential("********", "************")
             #             http_profile = HttpProfile()
             #             http_profile.endpoint = "tbp.tencentcloudapi.com"
             #             client_profile = ClientProfile()
@@ -208,7 +199,7 @@ class ChatConsumer(WebsocketConsumer):
             #
             #             # 创建 TBP 请求
             #             req = models.TextProcessRequest()
-            #             req.BotId = 'd2b163de-faa0-4c01-b53a-5f59e2fb1a54'  # 您的 TBP 机器人 ID
+            #             req.BotId = '**************************'  # 您的 TBP 机器人 ID
             #             params = {
             #                 "Query": message['text']
             #             }
@@ -237,7 +228,7 @@ class ChatConsumer(WebsocketConsumer):
 
     #             # 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey,此处还需注意密钥对的保密
     #             # 密钥可前往https://console.cloud.tencent.com/cam/capi网站进行获取
-    #             cred = credential.Credential("AKIDLZeXFLEvP6arvlNmxud7MO0OXTnmX4Xt", "IMHG4oOn01pRtBH9oJacIsGRyMZXGrLe")
+    #             cred = credential.Credential("******************", "************************")
     #             # 实例化一个http选项，可选的，没有特殊需求可以跳过
     #             httpProfile = HttpProfile()
     #             httpProfile.endpoint = "nlp.tencentcloudapi.com"
